@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <!-- ⚠️ 警告提示框 -->
+  <div class="alert alert-danger border border-danger flash-alert" role="alert">
+    ⚠️ This website may be a phishing site. Please double-check the URL before logging in.  
+    If you suspect a fake site, contact: +44 77848279
+  </div>
+
+  <h2>Login</h2>
+  <form action="/login" method="POST">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
+
+<!-- ✨ 加上闪烁动画 -->
+<style>
+.flash-alert {
+  animation: flash 1.2s infinite;
+}
+
+@keyframes flash {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+</style>
+{% endblock %}

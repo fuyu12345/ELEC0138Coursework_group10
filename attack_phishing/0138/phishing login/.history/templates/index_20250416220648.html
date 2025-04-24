@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Welcome to Pasta Platform</h2>
+  <p>This is a simulated homepage.</p>
+
+  <a href="/login" class="btn btn-primary me-2">Login</a>
+  <a href="/register" class="btn btn-secondary me-2">Register</a>
+
+  <!-- 👇 New suspicious report button -->
+  <a href="/warning" class="btn btn-danger ms-2">Report Suspicious Activity</a>
+</div>
+{% endblock %}

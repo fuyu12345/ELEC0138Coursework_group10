@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- 👇 闪烁警告框区域 -->
+    <div class="alert alert-danger border border-danger flash-alert" role="alert">
+        ⚠️ This website may be a phishing site. Please double-check the URL before logging in.
+        If you suspect a fake site, contact: +44 77848279
+    </div>
+
+    <h2>Login</h2>
+    <form action="{{ url_for('login') }}" method="post">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <div class="container mt-5">
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+    </div>
+</div>
+
+<!-- 加入 CSS 动画效果 -->
+<style>
+.flash-alert {
+    animation: flash 1s infinite;
+}
+
+@keyframes flash {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}

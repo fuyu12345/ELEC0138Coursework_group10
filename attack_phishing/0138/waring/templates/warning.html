@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}⚠️ Warning{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="p-4 rounded bg-danger text-white text-center border border-white shadow-lg" style="animation: flash 1s infinite;">
+    <h1 class="display-4">⚠️ SECURITY ALERT</h1>
+    <p class="lead mt-3"> Illegal phishing sites have recently appeared.</p>
+    <p>Please do not enter any personal information if the location is not http://127.0.0.1:5001.</p>
+    <hr style="border-top: 2px solid white;">
+    <p>If you see any phishing site, report it to:</p>
+    <p class="fw-bold fs-4">+44 77848279</p>
+    <a href="http://officialsite.com" class="btn btn-light mt-3">Back to Safety</a>
+  </div>
+</div>
+
+<style>
+@keyframes flash {
+  0%   { background-color: #dc3545; }
+  50%  { background-color: #a30000; }
+  100% { background-color: #dc3545; }
+}
+</style>
+{% endblock %}

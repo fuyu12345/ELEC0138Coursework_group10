@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container"> 
+    
+    <div class="container mt-4">
+        <h1 class="display-4">Pasta Sales Management</h1> <!-- Larger heading size -->
+        <p class="lead">Here you can manage pasta sales data, including viewing historical data, adding new records, and deleting data.</p>
+        <hr class="my-4"> 
+        <div class="alert alert-secondary mt-4" role="alert">
+            
+        <p>Note: 1.For convenience, the pasta number will increase automatically after adding new data.</p>
+            <!-- add white space -->
+           <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            2.Make sure the new data added has the correct date to support predictor work appropriately.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                3.Available data from 2014-2018.</p>
+            
+        </div>
+        
+    
+    <div class="row">
+        <!-- Add New Sales Data Section -->
+        <div class="col-md-4">
+            <h3>Add New Sales Data</h3>
+            <!-- Form to add new sales data -->
+            <form action="{{ url_for('add_sales_record') }}" method="POST">
+                {{ add_form.hidden_tag() }}
+                <div class="form-group">
+                    {{ add_form.date.label(class="form-label") }}
+                    {{ add_form.date(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ add_form.brand.label(class="form-label") }}
+                    {{ add_form.brand(class="form-control", id="brandSelect") }}
+                </div>
+                <div class="form-group">
+                    {{ add_form.specific_pasta.label(class="form-label") }}
+                    {{ add_form.specific_pasta(class="form-control", id="pastaIdInput") }}
+                </div>
+                <div class="form-group">
+                    {{ add_form.sales.label(class="form-label") }}
+                    {{ add_form.sales(class="form-control") }}
+                </div>
+                <div class="form-group form-check">
+                    <input id="promotion" type="checkbox" name="promotion" class="form-check-input">
+                    <label for="promotion" class="form-check-label">Promotion</label>
+                </div>
+                {{ add_form.submit(id="hiddenSubmit", class="btn btn-success", style="display:none;") }}
+                <button type="button" class="btn btn-success" onclick="incrementId()" style="margin-top: 20px;">Submit</button>
+            </form>
+        </div>
+        
+        <!-- Check Historical Data Section -->
+        <div class="col-md-4">
+            <h3>Check Historical Data</h3>
+            <!-- Form to check historical sales data -->
+            <form action="{{ url_for('sales_management1') }}" method="POST">
+                {{ check_form.hidden_tag() }}
+                <div class="form-group">
+                    {{ check_form.brandd.label(class="form-label") }}
+                    {{ check_form.brandd(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ check_form.specific_pastad.label(class="form-label") }}
+                    {{ check_form.specific_pastad(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ check_form.dated.label(class="form-label") }}
+                    {{ check_form.dated(class="form-control") }}
+                </div>
+                {{ check_form.submit(class="btn btn-info") }}
+            </form>
+        </div>
+        
+        <!-- Delete Historical Data Section -->
+        <div class="col-md-4">
+            <h3>Delete Historical Data</h3>
+            <!-- Form to delete historical data -->
+            <form action="{{ url_for('delete_sales_record_by_details') }}" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.branddd.label(class="form-label") }}
+                    {{ form.branddd(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.specific_pastadd.label(class="form-label") }}
+                    {{ form.specific_pastadd(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.datedd.label(class="form-label") }}
+                    {{ form.datedd(class="form-control") }}
+                </div>
+                <button type="submit" class="btn btn-danger" style="margin-top: 20px;">Delete Record</button>
+            </form>
+        </div>
+    </div>
+    
+
+</div>
+   <!-- JavaScript for handling form submission, give a new function that the pasta id can increase automaticaly to save time -->
+   <script>
+    const maxIds = { 'Brand 1': 42, 'Brand 2': 45, 'Brand 3': 21, 'Brand 4': 10 };
+    const brandOrder = ['Brand 1', 'Brand 2', 'Brand 3', 'Brand 4'];
+  
+    function incrementId() {
+        var brandSelect = document.getElementById('brandSelect');
+        var pastaIdInput = document.getElementById('pastaIdInput');
+        var currentBrand = brandSelect.options[brandSelect.selectedIndex].text;
+        var currentId = parseInt(pastaIdInput.value);
+        
+        // Check if the current ID is the last one for the brand
+        if (currentId <= maxIds[currentBrand]) {
+             // If not the last ID, just increment the pasta ID
+             pastaIdInput.value = currentId + 1;
+            // Output to console for debugging purposes
+            console.log(currentId, maxIds[currentBrand]);
+        } 
+      
+        // Programmatically click the hidden submit button
+        document.getElementById('hiddenSubmit').click();
+    }
+</script>
+</div>
+{% endblock %}
